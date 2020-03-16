@@ -29,8 +29,8 @@ namespace MISA.Test_ElasticSearch.Controllers
         {
             var response = await (client.SearchAsync<Recipe>
                 (
-                    s => s.Index("recipe.recipes").Size(600).Query(q => q.Bool(b => b.Must(m => m.Match(ma => ma.Field(f => f.name).Query("Soba")), mb => mb.Match(ma => ma.Field(f => f.name).Query("Sting")))))
-                )));
+                    s => s.Index("abc.abcd").Size(100).Query(q => q.Match(m => m.Field(f => f.name).Query("Cold Coban"))).Sort(so => so.Ascending(de => de.cookTime.Suffix("keyword")))
+                )) ;
             return response.Hits.Select(s => s.Source).ToList();
         }
 
